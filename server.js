@@ -1,8 +1,15 @@
 const express = require('express');
 const fs = require('fs');
+const https = require('https');
 const cheerio = require('cheerio');
 
 const app = express();
+
+
+const privateKey = fs.readFileSync('cetificates/key.pem', 'utf8');
+const certificate = fs.readFileSync('cetificates/cert.pem', 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+
 
 // تعریف فایل استاتیک
 app.use(express.static('public'));
@@ -17,6 +24,10 @@ app.get('/', (req, res) => {
   });
 });
 
-app.listen(80, () => {
-  console.log('Server is running on port 3000');
+const httpsServer = https.createServer(credentials, app);
+
+
+httpsServer.listen(3000, () => {
+  console.log('HTTPS Server running on port 3000');
 });
+
