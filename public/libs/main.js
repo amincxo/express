@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     video.pause();
     const texture = new THREE.VideoTexture(video);
 
-    const geometry = new THREE.PlaneGeometry(1, 1080/1920);
+    const geometry = new THREE.PlaneGeometry(1, 1/1);
     // const material = new THREE.MeshBasicMaterial({map: texture});
     const material = createChromaMaterial(texture, 0x00ff00);
     const plane = new THREE.Mesh(geometry, material);
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // plane.rotation.z = 0;
     plane.position.y = 0;
     // plane.position.z = 0.8;
-    plane.scale.multiplyScalar(1);
+    plane.scale.multiplyScalar(0.5);
 
     const anchor = mindarThree.addAnchor(0);
     anchor.group.add(plane);
